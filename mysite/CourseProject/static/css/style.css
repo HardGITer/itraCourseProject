@@ -1,0 +1,23 @@
+a.text:active, /* активная/посещенная ссылка */
+a.text:hover,  /* при наведении */
+a.text {
+  text-decoration: none;
+  color: #000;
+}
+
+.clickableBlock{
+width:700px;
+cursor:pointer;
+}
+
+.tag{
+display:inline-block;
+padding-right:10px;
+}
+
+.sidebarContainer{
+margin-left: 1229px;
+margin-top: 70px;
+//border: 10px double black;
+
+}
