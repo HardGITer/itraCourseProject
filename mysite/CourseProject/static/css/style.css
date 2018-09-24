@@ -16,8 +16,15 @@ padding-right:10px;
 }
 
 .sidebarContainer{
-margin-left: 1229px;
+margin-left: 1029px;
 margin-top: 70px;
-//border: 10px double black;
+//border: 1px solid;
+}
 
+.likeBlock{
+display:block;
+float:left;
+width:50px;
+padding-right:10px;
+text-align:center;
 }
