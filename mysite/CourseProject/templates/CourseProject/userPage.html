@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if articles.count > 0 %}
+    <h2>Список пользователей</h2>
+    <table>
+        <tr><th>Id</th><th>Имя</th><th>Возраст</th></tr>
+        {% for item in articles %}
+        <tr><td>{{ item.name }}</td><td>{{ item.shortDescription }}</td><td>{{ item.mainText }}</td><td>{{ item.creationDate }}</td></tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <form method="POST" action="createArticle/">
+        {% csrf_token %}
+        <p>
+            <label>название</label><br>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <label>описание</label><br>
+            <input type="text" name="shortDescription" />
+        </p>
+        <p>
+            <label>номер специальности</label><br>
+            <input type="text" name="specialityNumber" />
+        </p>
+        <p>
+            <label>текст</label><br>
+            <input type="text" name="mainText" />
+        </p>
+        <input type="submit" value="Создать" >
+    </form>
+</body>
+</html>

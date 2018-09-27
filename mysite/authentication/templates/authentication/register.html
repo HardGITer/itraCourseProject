@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register</title>
+      {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+  </head>
+  <body>
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+      {{ form.as_p }}
+      <button class="btn btn-default" type="submit">Submit</button>
+      <button class="btn btn-default" type="submit"><a href="authentication/login.html">Login</a></button>
+    </form>
+  </body>
+</html>
