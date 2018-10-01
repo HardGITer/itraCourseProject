@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render
 from django.views.generic import FormView
@@ -28,3 +28,7 @@ class RegisterFormView(FormView):
 
     def form_valid(self, form):
         return form.save()
+
+def logoutView(request):
+    logout(request)
+    return render(request, "authentication/login.html")

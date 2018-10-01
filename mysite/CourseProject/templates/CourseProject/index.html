@@ -2,123 +2,181 @@
 {% block content %}
 <script src="/static/js/uploadImage.js"></script>
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-  <script>
+<script>
   tinymce.init({
     selector: '#mytextarea'
   });
-  </script>
+
+
+</script>
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 <!--<h1>{{LANGUAGE_CODE}}</h1>-->
 
-  <form method="post" class="container">
-    <textarea id="mytextarea">Hello, World!</textarea>
-  </form>
+<!--<form method="post" class="container">-->
+<!--<textarea id="mytextarea">Hello, World!</textarea>-->
+<!--</form>-->
 
-<a href="#" id="upload_widget_opener">Upload image</a>
-{{ user }}
+<!--<a href="#" id="upload_widget_opener">Upload image</a>-->
+<!--{{ user }}-->
 
-    <!--<div style="  position: absolute;-->
-  <!--top: 0;-->
-  <!--bottom: 0;-->
+<!--<div style="  position: absolute;-->
+<!--top: 0;-->
+<!--bottom: 0;-->
 
-   <!--border: 1px solid;">-->
+<!--border: 1px solid;">-->
 <!--</div>-->
+<div style="float:right;">
+    <div style="width: 330px;   position: sticky; top: 0; min-height: 2em;" class="card mb-4 shadow-sm">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Пользователь</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled mt-3 mb-4">
+                <!--<li>-->
+                    <!--<button class="btn btn-default" type="submit"><a href="{% url 'register' %}">Регистрация</a>-->
+                    <!--</button>-->
+                <!--</li>-->
+                <li>
+                    <!--<form action="{% url 'register' %}">-->
+                    <a href="{% url 'register' %}">   <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Зарегистрироваться</button></a>
+                    <!--</form>-->
+                </li>
+                <br>
+                <li><a href="{% url 'login' %}">   <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Войти</button></a></li>
+                <br>
+                <li><a href="{% url 'logout' %}">   <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Выйти</button></a></li>
+            </ul>
+            <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign in</button>-->
+        </div>
+    </div>
+</div>
+</div>
+
 <div style="padding-top:10px; width:1200px;" class="container">
+    {% if articles.count > 0 %}
+    {% for item in articles %}
     <div style="float:left; width: 770px;">
-    <div style="padding-top:10px; width:1200px;" class="container">
-        <div style="padding-left:0px;" class="col"><div class="likeBlock">
-            <p>&#x25B2</p>
-            <p style="font-size:12px;">200</p>
-            <p>&#x25BC</p>
-        </div>
-            <div onclick="location.href='#'" class="card mb-4 shadow-sm clickableBlock">
-                <h1 style="width:98%; margin:auto"><a class="text" href="#">TITLE</a></h1>
-                <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: auto; width: 98%; display: block; margin:auto;" src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">
-                <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aspernatur beatae consectetur delectus dolorum facere incidunt laboriosam molestias odio officia porro quisquam quo ratione, repellat saepe sunt tempora tenetur veniam!</p>
-                    <div class="tag">
-                        <a href="##">нувпопу</a>
-                    </div>
-                    <div class="tag">
-                        <a href="##">сложна</a>
-                    </div>
-                    <div class="tag">
-                        <a href="##">внатурелучшеобезьянкой</a>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="d-flex justify-content-between align-items-center"><div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>
-                    </div><small class="text-muted">time</small>
+        <div style="padding-top:10px; width:1200px;" class="container">
+            <div style="padding-left:0px;" class="col">
+                <div class="likeBlock">
+                    <p>&#x25B2</p>
+                    <p style="font-size:12px;">{{ item.likes }}</p><!--likesForArticles.0.article.id-->
+                    <p>&#x25BC</p>
+                </div>
+                <div onclick="location.href='view/{{ item.id }}'" class="card mb-4 shadow-sm clickableBlock">
+                    <h1 style="width:98%; margin:auto"><a class="text" href="#">{{ item.name }}</a></h1>
+                    <img class="card-img-top" alt="Thumbnail [100%x225]"
+                         style="height: auto; width: 98%; display: block; margin:auto;"
+                         src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">
+                    <div class="card-body">
+                        <div style="max-height:180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <p class="card-text">{{ item.mainText|safe }}</p>
+                        </div>
+                        <div class="tag">
+                            <a href="##">нувпопу</a>
+                        </div>
+                        <div class="tag">
+                            <a href="##">сложна</a>
+                        </div>
+                        <div class="tag">
+                            <a href="##">внатурелучшеобезьянкой</a>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>
+                            </div>
+                            <small class="text-muted">{{item.creationDate}}</small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-</div>
-
-<div style="padding-top:10px; width:1200px" class="container">
-        <div class="col">
-        <div style="display:block; float:left; margin-right: 20px">
-                <p>&#x25B2</p>
-                <p>&#x25BC</p>
-            </div>
-            <div onclick="location.href='#'" class="card mb-4 shadow-sm clickableBlock">
-                <h1 style="width:98%; margin:auto"><a class="text" href="#">TITLE</a></h1>
-                <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: auto; width: 98%; display: block; margin:auto;" src="https://pp.userapi.com/c834403/v834403400/149228/Bgo3zuBA0RM.jpg?ava=1" data-holder-rendered="true">
-                <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-between align-items-center"><div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>
-                    </div><small class="text-muted">9 mins</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
-
-<div style="padding-top:10px; width:1200px" class="container">
-        <div class="col">
-        <div style="display:block; float:left; margin-right: 20px">
-                <p>&#x25B2</p>
-                <p>&#x25BC</p>
-            </div>
-            <div onclick="location.href='#'" class="card mb-4 shadow-sm clickableBlock">
-                <h1 style="width:98%; margin:auto"><a class="text" href="#">TITLE</a></h1>
-                <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: auto; width: 98%; display: block; margin:auto;" src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">
-                <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-between align-items-center"><div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>
-                    </div><small class="text-muted">9 mins</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
-    </div>
-
-    <div style="float:right;">
-        <div style="width: 330px;   position: sticky;
-  top: 0;
-  min-height: 2em;" class="card mb-4 shadow-sm">
-              <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Авторизация</h4>
-              </div>
-              <div class="card-body">
-                <h1>Registration properties</h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                  <li>10 users included</li>
-                  <li>2 GB of storage</li>
-                  <li>Email support</li>
-                  <li>Help center access</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign in</button>
-              </div>
         </div>
     </div>
-</div>
-{% endblock %}
+    {% endfor %}
+    {% endif %}
+
+
+    <!--<div style="padding-top:10px; width:1200px;" class="container">-->
+    <!--<div style="float:left; width: 770px;">-->
+    <!--<div style="padding-top:10px; width:1200px;" class="container">-->
+    <!--<div style="padding-left:0px;" class="col"><div class="likeBlock">-->
+    <!--<p>&#x25B2</p>-->
+    <!--<p style="font-size:12px;">200</p>-->
+    <!--<p>&#x25BC</p>-->
+    <!--</div>-->
+    <!--<div onclick="location.href='#'" class="card mb-4 shadow-sm clickableBlock">-->
+    <!--<h1 style="width:98%; margin:auto"><a class="text" href="#">TITLE</a></h1>-->
+    <!--<img class="card-img-top" alt="Thumbnail [100%x225]" style="height: auto; width: 98%; display: block; margin:auto;" src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">-->
+    <!--<div class="card-body">-->
+    <!--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aspernatur beatae consectetur delectus dolorum facere incidunt laboriosam molestias odio officia porro quisquam quo ratione, repellat saepe sunt tempora tenetur veniam!</p>-->
+    <!--<div class="tag">-->
+    <!--<a href="##">нувпопу</a>-->
+    <!--</div>-->
+    <!--<div class="tag">-->
+    <!--<a href="##">сложна</a>-->
+    <!--</div>-->
+    <!--<div class="tag">-->
+    <!--<a href="##">внатурелучшеобезьянкой</a>-->
+    <!--</div>-->
+    <!--<br>-->
+    <!--<br>-->
+    <!--<div class="d-flex justify-content-between align-items-center"><div class="btn-group">-->
+    <!--<button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>-->
+    <!--<button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>-->
+    <!--</div><small class="text-muted">time</small>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div style="padding-top:10px; width:1200px" class="container">-->
+    <!--<div class="col">-->
+    <!--<div style="display:block; float:left; margin-right: 20px">-->
+    <!--<p>&#x25B2</p>-->
+    <!--<p>&#x25BC</p>-->
+    <!--</div>-->
+    <!--<div onclick="location.href='#'" class="card mb-4 shadow-sm clickableBlock">-->
+    <!--<h1 style="width:98%; margin:auto"><a class="text" href="#">TITLE</a></h1>-->
+    <!--<img class="card-img-top" alt="Thumbnail [100%x225]" style="height: auto; width: 98%; display: block; margin:auto;" src="https://pp.userapi.com/c834403/v834403400/149228/Bgo3zuBA0RM.jpg?ava=1" data-holder-rendered="true">-->
+    <!--<div class="card-body">-->
+    <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+    <!--<div class="d-flex justify-content-between align-items-center"><div class="btn-group">-->
+    <!--<button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>-->
+    <!--<button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>-->
+    <!--</div><small class="text-muted">9 mins</small>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div style="padding-top:10px; width:1200px" class="container">-->
+    <!--<div class="col">-->
+    <!--<div style="display:block; float:left; margin-right: 20px">-->
+    <!--<p>&#x25B2</p>-->
+    <!--<p>&#x25BC</p>-->
+    <!--</div>-->
+    <!--<div onclick="location.href='#'" class="card mb-4 shadow-sm clickableBlock">-->
+    <!--<h1 style="width:98%; margin:auto"><a class="text" href="#">TITLE</a></h1>-->
+    <!--<img class="card-img-top" alt="Thumbnail [100%x225]" style="height: auto; width: 98%; display: block; margin:auto;" src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">-->
+    <!--<div class="card-body">-->
+    <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+    <!--<div class="d-flex justify-content-between align-items-center"><div class="btn-group">-->
+    <!--<button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>-->
+    <!--<button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>-->
+    <!--</div><small class="text-muted">9 mins</small>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    {% endblock %}

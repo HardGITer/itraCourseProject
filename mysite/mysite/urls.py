@@ -19,13 +19,22 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
-]
-
-urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('main/', include('CourseProject.urls')),
     path('authentication/', include('authentication.urls')),
     path('accounts/', include('allauth.urls')),
-    prefix_default_language=False,
-)
+]
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+# ]
+#
+# urlpatterns += i18n_patterns(
+#     path('admin/', admin.site.urls),
+#     path('main/', include('CourseProject.urls')),
+#     path('authentication/', include('authentication.urls')),
+#     path('accounts/', include('allauth.urls')),
+#     prefix_default_language=True,
+# )

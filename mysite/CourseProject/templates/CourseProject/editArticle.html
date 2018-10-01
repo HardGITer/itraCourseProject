@@ -1,0 +1,39 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Title</title>-->
+
+<!--</head>-->
+<!--<body>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+{% extends "CourseProject/wrapper.html"%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+{% block content %}
+    <form method="POST" class="container">
+        {% csrf_token %}
+        <p>
+            <label>name</label><br>
+            <input type="text" name="name" value="{{article.name}}" />
+        </p>
+        <p>
+            <label>shortDescription</label><br>
+            <input type="text" name="shortDescription" value="{{article.shortDescription}}" />
+        </p>
+        <p>
+            <label>specialityNumber</label><br>
+            <input type="text" name="specialityNumber" value="{{article.specialityNumber}}" />
+        </p>
+        <p>
+            <label>mainText</label><br>
+            <!--<input type="text" name="mainText" value="{{article.mainText}}" />-->
+            <textarea name="editor" id="editor">{{article.mainText|safe}}</textarea>
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+{% endblock %}
+
+<!--</body>-->
+<!--</html>-->
