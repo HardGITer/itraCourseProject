@@ -1,23 +1,95 @@
 {% extends "CourseProject/wrapper.html"%}
 {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click', '#like', function(event){
+        event.preventDefault();
+        var pk = $(this).attr('value');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "like_post" %}',
+            data: {'id': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: 'json',
+            success: function(response){
+                $('#like-section').html(response['form'])
+                console.log($('#like-section').html(response['form']));
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            }
+        });
+    });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click', '#commentBtn', function(event){
+        event.preventDefault();
+        var pk = $(this).attr('value');
+        var text = document.getElementById('comment').value;
+        $.ajax({
+            type: 'POST',
+            url: '{% url "add_comment" %}',
+            data: {'id': pk, 'text': text, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: 'json',
+            success: function(response){
+                $('#comment-section').html(response['form'])
+                console.log($('#comment-section').html(response['form']));
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            }
+        });
+    });
+});
+</script>
+
+<script>
+function check(){
+var pk = document.getElementById('commentBtn').value;
+$.ajax({
+            type: 'POST',
+            url: '{% url "check_comment" %}',
+            data: {'id': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: 'json',
+            success: function(response){
+                $('#comment-section').html(response['form'])
+                console.log($('#comment-section').html(response['form']));
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            }
+        });
+}
+
+    $(document).ready(function(){
+check();
+setInterval('check()',5000);
+});
+</script>
+
+
+
 <div style="padding-top:10px; width:1200px;" class="container">
-<div style="float:right;">
-    <div style="width: 330px;   position: sticky; top: 0; min-height: 2em;" class="card mb-4 shadow-sm">
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Авторизация</h4>
-        </div>
-        <div class="card-body">
-            <h1>Registration properties</h1>
-            <ul class="list-unstyled mt-3 mb-4">
-                <li>10 users included</li>
-                <li>2 GB of storage</li>
-                <li>Email support</li>
-                <li>Help center access</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign in</button>
+    <div style="float:right;">
+        <div style="width: 330px;   position: sticky; top: 0; min-height: 2em;" class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Авторизация</h4>
+            </div>
+            <div class="card-body">
+                <h1>Registration properties</h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>10 users included</li>
+                    <li>2 GB of storage</li>
+                    <li>Email support</li>
+                    <li>Help center access</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign in</button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <div style="padding-top:0px; width:1200px;" class="container">
@@ -25,13 +97,16 @@
     <div style=" float:left; width: 770px;">
         <div style="padding-top:0px; width:1200px;" class="container">
             <div style="padding-left:0px;" class="col">
+                <div id="like-section">
+                    {% include "feedback/like_section.html" %}
+                </div>
                 <div class="likeBlock">
                     <p>&#x25B2</p>
                     <p style="font-size:12px;">{{ article.likes }}</p><!--likesForArticles.0.article.id-->
                     <p>&#x25BC</p>
                 </div>
-                <div onclick="location.href='view/{{ item.id }}'" class="card mb-4 shadow-sm clickableBlock">
-                    <h1 style="width:98%; margin:auto"><a class="text" href="#">{{ article.name }}</a></h1>
+                <div style="cursor: auto" class="card mb-4 shadow-sm clickableBlock">
+                    <h1 style="width:98%; margin:auto"><a class="text">{{ article.name }}</a></h1>
                     <img class="card-img-top" alt="Thumbnail [100%x225]"
                          style="height: auto; width: 98%; display: block; margin:auto;"
                          src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">
@@ -56,6 +131,14 @@
                                 <button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>
                             </div>
                             <small class="text-muted">{{article.creationDate}}</small>
+                        </div>
+                        <div>
+
+                            <div id="comment-section">
+
+                                <p class="card-text">{% include "feedback/comment_section.html" %}</p>
+                            </div>
+                            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
                         </div>
                     </div>
                 </div>

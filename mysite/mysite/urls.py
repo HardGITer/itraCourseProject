@@ -25,6 +25,7 @@ urlpatterns = [
     path('main/', include('CourseProject.urls')),
     path('authentication/', include('authentication.urls')),
     path('accounts/', include('allauth.urls')),
+    path('feedback/', include('Feedback.urls')),
 ]
 
 # urlpatterns = [

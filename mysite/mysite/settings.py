@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'CourseProject',
     'authentication',
+    'Feedback',
     'django.contrib.sites',
 ]
 

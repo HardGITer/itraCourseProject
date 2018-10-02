@@ -3,7 +3,7 @@ import datetime
 from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Article, LikeForArticle
+from .models import Article, LikeForArticle, Comment
 
 from django.utils.translation import ugettext as _
 
@@ -14,9 +14,11 @@ def index(request):
     # translation.activate(user_language)
     # request.session[translation.LANGUAGE_SESSION_KEY] = user_language
 
-
-    data = {"user": request.user, "articles": Article.objects.all().annotate(likes=Sum('likeforarticle__id')),
-            "likesForArticles": LikeForArticle.objects.all()}
+    # .annotate(likes=Sum('likeforarticle__id')),
+    #post = Article.objects.get(id=request.POST.get('id'))
+    data = {"user": request.user, "articles": Article.objects.all(),
+            "likesForArticles": LikeForArticle.objects.all(),
+            "is_liked": True, "total_likes": 5}
     return render(request, 'CourseProject/index.html', context=data)
 
 
@@ -82,6 +84,13 @@ def output(request):
 def view(request, id):
     try:
         article = Article.objects.get(id=id)
-        return render(request, "CourseProject/viewArticle.html", {"article": article})
+        # comments = Comment.objects.filter(article=article)
+        is_liked = False
+        if article.likes.filter(id=request.user.id).exists():
+            is_liked = True
+        else:
+            is_liked = False
+        return render(request, "CourseProject/viewArticle.html", {"article": article, "user": request.user,
+            "is_liked": is_liked, "total_likes": article.likes.all().count()})
     except Article.DoesNotExist:
-        return redirect("<h2>article does't found")
+        return redirect("<h2>article does't found<h2>")

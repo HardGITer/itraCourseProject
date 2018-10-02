@@ -1,5 +1,7 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.contrib.auth.models import User
+
 
 class Article(models.Model):
     name = models.CharField(max_length=50)
@@ -8,6 +10,8 @@ class Article(models.Model):
     mainText = models.TextField()
     creationDate = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
 class LikeForArticle(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
