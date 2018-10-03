@@ -1,0 +1,42 @@
+<!--{{ total_likes }} Like-->
+<!--{% if request.user.is_authenticated %}-->
+<!--<form action="{% url 'like_post' %}" method="post">-->
+    <!--{% csrf_token %}-->
+    <!--{% if is_liked %}-->
+    <!--<button type="submit" id="like" name="post_id" value="{{ article.id }}" class="btn btn-success">liked</button>-->
+    <!--{% else %}-->
+    <!--<button type="submit" id="like" name="post_id" value="{{ article.id }}" class="btn btn-danger">disliked</button>-->
+    <!--{% endif %}-->
+<!--</form>-->
+<!--{% endif %}-->
+
+<form action="" method="post">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="rating-block">
+                <h4>Average user rating </h4>
+                    <!--{% for s in rating %}-->
+                        <!--{{ s.starCount }}-->
+                    <!--{% endfor %}-->
+                <h2 class="bold padding-bottom-7">4.3
+                    <small>/ 5</small>
+                </h2>
+                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
+                </button>
+                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
+                </button>
+                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
+                </button>
+                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
+                </button>
+                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

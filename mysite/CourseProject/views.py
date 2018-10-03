@@ -3,7 +3,7 @@ import datetime
 from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Article, LikeForArticle, Comment
+from .models import Article, LikeForArticle, Comment, Rating
 
 from django.utils.translation import ugettext as _
 
@@ -18,7 +18,7 @@ def index(request):
     #post = Article.objects.get(id=request.POST.get('id'))
     data = {"user": request.user, "articles": Article.objects.all(),
             "likesForArticles": LikeForArticle.objects.all(),
-            "is_liked": True, "total_likes": 5}
+            "is_liked": True, "total_likes": 5, "rating": Rating.objects.all()}
     return render(request, 'CourseProject/index.html', context=data)
 
 

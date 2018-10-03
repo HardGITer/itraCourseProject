@@ -74,19 +74,30 @@ $(document).ready(function(event){
 </div>
 </div>
 
-<div style="padding-top:10px; width:1200px;" class="container">
+<div style="width:1200px;" class="container">
+
+
     {% if articles.count > 0 %}
     {% for item in articles %}
+
     <div style="float:left; width: 770px;">
         <div style="padding-top:10px; width:1200px;" class="container">
             <div style="padding-left:0px;" class="col">
-                <div id="like-section">
-                    {% include "feedback/like_section.html" %}
-                </div>
+                <!--<div id="like-section">-->
+                    <!--{% include "feedback/like_section.html" %}-->
+                <!--</div>-->
                 <div class="likeBlock">
                     <p>&#x25B2</p>
-                    <p style="font-size:12px;">{{ item.likes }}</p><!--likesForArticles.0.article.id-->
+                    <p style="font-size:12px;">{{ item.likes.count }}</p><!--likesForArticles.0.article.id-->
                     <p>&#x25BC</p>
+                </div>
+                <div>
+                    {% for s in item.get_rating_for_article %}
+             {{ s.starCount }}
+        {% endfor %}
+                </div>
+                <div id="rating-section">
+                    {% include "feedback/rating_section.html" %}
                 </div>
                 <div onclick="location.href='view/{{ item.id }}'" class="card mb-4 shadow-sm clickableBlock">
                     <h1 style="width:98%; margin:auto"><a class="text" href="#">{{ item.name }}</a></h1>

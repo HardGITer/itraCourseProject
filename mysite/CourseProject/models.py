@@ -13,6 +13,9 @@ class Article(models.Model):
 
     likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
+    def get_rating_for_article(self):
+        return self.rating_set.filter(article_id=self.id)
+
 class LikeForArticle(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
