@@ -90,6 +90,7 @@ def view(request, id):
             is_liked = True
         else:
             is_liked = False
+
         return render(request, "CourseProject/viewArticle.html", {"article": article, "user": request.user,
             "is_liked": is_liked, "total_likes": article.likes.all().count()})
     except Article.DoesNotExist:

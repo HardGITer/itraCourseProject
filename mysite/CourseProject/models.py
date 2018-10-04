@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Avg
 
 
 class Article(models.Model):
@@ -14,7 +15,7 @@ class Article(models.Model):
     likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
     def get_rating_for_article(self):
-        return self.rating_set.filter(article_id=self.id)
+        return self.rating_set.filter(article_id=self.id).aggregate(Avg('starCount'))
 
 class LikeForArticle(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)

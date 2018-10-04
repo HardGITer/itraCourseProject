@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from django.apps import apps
 Article = apps.get_model('CourseProject', 'Article')
 Comment = apps.get_model('CourseProject', 'Comment')
+Rating = apps.get_model('CourseProject', 'Rating')
 
 def index(request):
     return render(request,"test")
@@ -63,4 +64,28 @@ def check_comment(request):
     }
     if request.is_ajax():
         html = render_to_string('feedback/comment_section.html',context=context, request=request)
+        return JsonResponse({'form': html})
+
+def add_rating(request):
+    article = Article.objects.get(id=request.POST.get("id"))
+    # is_rated = False
+    if Rating.objects.filter(user = request.user.id).exists():
+        # is_rated = False
+        rating = Rating.objects.get(user = request.user.id)
+        rating.starCount = request.POST.get('starCount')
+        rating.save()
+    else:
+        rating = Rating()
+        rating.article = article
+        rating.user = request.user
+        rating.starCount = request.POST.get('starCount')
+        rating.save()
+        # is_rated = True
+
+    context = {
+        'article': article,
+        # 'is_rated': is_rated,
+    }
+    if request.is_ajax():
+        html = render_to_string('feedback/rating_section.html', context=context, request=request)
         return JsonResponse({'form': html})

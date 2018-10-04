@@ -1,41 +1,40 @@
-<!--{{ total_likes }} Like-->
-<!--{% if request.user.is_authenticated %}-->
-<!--<form action="{% url 'like_post' %}" method="post">-->
-    <!--{% csrf_token %}-->
-    <!--{% if is_liked %}-->
-    <!--<button type="submit" id="like" name="post_id" value="{{ article.id }}" class="btn btn-success">liked</button>-->
-    <!--{% else %}-->
-    <!--<button type="submit" id="like" name="post_id" value="{{ article.id }}" class="btn btn-danger">disliked</button>-->
-    <!--{% endif %}-->
-<!--</form>-->
-<!--{% endif %}-->
+<script>
+    $(document).ready(function(event){
+        var rating = document.getElementById('avgrating').firstChild.textContent;
+        $('#btns').children().each(function(index){
+            if (index < parseInt(rating, 10)){
+                $(this).css("background", "#ffc107");
+            }
+        });
+    });
+</script>
+                <!-- для добавления в индекс-->
 
 <form action="" method="post">
     <div class="row">
-        <div class="col-sm-3">
-            <div class="rating-block">
-                <h4>Average user rating </h4>
-                    <!--{% for s in rating %}-->
-                        <!--{{ s.starCount }}-->
-                    <!--{% endfor %}-->
-                <h2 class="bold padding-bottom-7">4.3
+        <div class="col-sm-5">
+            <div class="rating-block" style="">
+                <h4>Рейтинг конспекта: </h4>
+                <h2 id="avgrating" class="bold padding-bottom-7">{{ article.get_rating_for_article.starCount__avg }}
                     <small>/ 5</small>
                 </h2>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                <div id="btns">
+                <button id="ratingBtn" type="button" value="1" class="btn btn-warning btn-sm" aria-label="Left Align">
                     <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
                 </button>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                <button id="ratingBtn" type="button" value="2" class="btn btn-warning btn-sm" aria-label="Left Align">
                     <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
                 </button>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                <button id="ratingBtn" type="button" value="3" class="btn btn-warning btn-sm" aria-label="Left Align">
                     <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
                 </button>
-                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                <button id="ratingBtn" type="button" value="4" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
                     <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
                 </button>
-                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                <button id="ratingBtn" type="button" value="5" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
                     <span class="glyphicon glyphicon-star" aria-hidden="true">&#9733</span>
                 </button>
+                    </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,31 @@
 {% extends "CourseProject/wrapper.html"%}
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click', '#ratingBtn', function(event){
+        event.preventDefault();
+        var starCount = $(this).attr('value');
+        var pk = document.getElementById('commentBtn').value;
+        $.ajax({
+            type: 'POST',
+            url: '{% url "add_rating" %}',
+            data: {'id': pk, 'starCount': starCount, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: 'json',
+            success: function(response){
+                $('#rating-section').html(response['form'])
+                console.log($('#rating-section').html(response['form']));
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            }
+        });
+    });
+});
+
+</script>
+
 <script type="text/javascript">
 $(document).ready(function(event){
     $(document).on('click', '#like', function(event){
@@ -21,6 +46,7 @@ $(document).ready(function(event){
         });
     });
 });
+
 </script>
 
 <script type="text/javascript">
@@ -44,6 +70,7 @@ $(document).ready(function(event){
         });
     });
 });
+
 </script>
 
 <script>
@@ -68,8 +95,8 @@ $.ajax({
 check();
 setInterval('check()',5000);
 });
-</script>
 
+</script>
 
 
 <div style="padding-top:10px; width:1200px;" class="container">
@@ -124,6 +151,10 @@ setInterval('check()',5000);
                             <a href="##">внатурелучшеобезьянкой</a>
                         </div>
                         <br>
+                        <br>
+                        <div id="rating-section">
+                            {% include "feedback/rating_section.html" %}
+                        </div>
                         <br>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
