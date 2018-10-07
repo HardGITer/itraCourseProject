@@ -44,8 +44,16 @@ INSTALLED_APPS = [
     'CourseProject',
     'authentication',
     'Feedback',
+    'Search',
     'django.contrib.sites',
+    'django_elasticsearch_dsl',
 ]
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
 
 SITE_ID = 1
 
@@ -128,8 +136,6 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
-
-
 
 TIME_ZONE = 'UTC'
 

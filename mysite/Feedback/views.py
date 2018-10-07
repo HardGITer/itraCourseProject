@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 
@@ -10,13 +11,17 @@ from django.template.loader import render_to_string
 # from mysite.CourseProject.models import Article
 
 from django.apps import apps
+
 Article = apps.get_model('CourseProject', 'Article')
 Comment = apps.get_model('CourseProject', 'Comment')
 Rating = apps.get_model('CourseProject', 'Rating')
+Tag = apps.get_model('CourseProject', 'Tag')
+
 
 def index(request):
     return render(request,"test")
 
+@login_required(login_url="login")
 def like_post(request): # надо передавать все статьи, и как-то получать лайкнул юзер или нет
     post = Article.objects.get(id=request.POST.get('id'))
     is_liked = False
@@ -36,6 +41,7 @@ def like_post(request): # надо передавать все статьи, и 
         html = render_to_string('feedback/like_section.html',context=context, request=request)
         return JsonResponse({'form': html})
 
+@login_required(login_url="login")
 def add_comment(request):
     article = Article.objects.get(id=request.POST.get("id"))
 
@@ -66,10 +72,11 @@ def check_comment(request):
         html = render_to_string('feedback/comment_section.html',context=context, request=request)
         return JsonResponse({'form': html})
 
+@login_required(login_url="login")
 def add_rating(request):
     article = Article.objects.get(id=request.POST.get("id"))
     # is_rated = False
-    if Rating.objects.filter(user = request.user.id).exists():
+    if Rating.objects.filter(user = request.user.id, article=article).exists():
         # is_rated = False
         rating = Rating.objects.get(user = request.user.id)
         rating.starCount = request.POST.get('starCount')
@@ -82,10 +89,25 @@ def add_rating(request):
         rating.save()
         # is_rated = True
 
+    articlee = Article.objects.get(id=request.POST.get("id"))
+
     context = {
-        'article': article,
+        'article': articlee,
         # 'is_rated': is_rated,
     }
     if request.is_ajax():
         html = render_to_string('feedback/rating_section.html', context=context, request=request)
         return JsonResponse({'form': html})
+
+def get_tags(request):
+    tags = Tag.objects.all()
+    tagsArr = []
+    for n in tags:
+        tagsArr.append(n.text)
+    # return render(request, "CourseProject/viewArticle.html", {"tags": tagsArr})
+    context = {
+        'tags': tagsArr,
+    }
+    if request.is_ajax():
+        html = render_to_string('feedback/tag_section.html', context=context, request=request)
+        return JsonResponse({'form': html, "tagar": tagsArr})

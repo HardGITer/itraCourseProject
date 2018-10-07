@@ -1,9 +1,10 @@
 import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Article, LikeForArticle, Comment, Rating
+from .models import Article, LikeForArticle, Comment, Rating, Tag
 
 from django.utils.translation import ugettext as _
 
@@ -21,7 +22,7 @@ def index(request):
             "is_liked": True, "total_likes": 5, "rating": Rating.objects.all()}
     return render(request, 'CourseProject/index.html', context=data)
 
-
+@login_required(login_url="login")
 def cabinet(request, userid):
     if request.user.is_authenticated:
         articles = Article.objects.filter(user=userid)
@@ -30,7 +31,7 @@ def cabinet(request, userid):
     else:
         return redirect("/authentication/login")
 
-
+@login_required(login_url="login")
 def create(request, userid):
     if request.method == "POST":
         article = Article()
@@ -40,13 +41,14 @@ def create(request, userid):
         article.mainText = request.POST.get("editor")  # mainText
         article.creationDate = datetime.datetime.now()
         article.user = request.user
+        # article.tags.set = request.POST.get("tags")
         article.save()
         # return redirect("main/cabinet")
         return render(request, "CourseProject/output.html", {"context": request.POST.get("editor")})
     else:
         return render(request, "CourseProject/create.html")
 
-
+@login_required(login_url="login")
 def edit(request, userid, id):
     try:
         article = Article.objects.get(id=id)
@@ -63,7 +65,7 @@ def edit(request, userid, id):
     except Article.DoesNotExist:
         return redirect("<h2>article does't found")
 
-
+@login_required(login_url="login")
 def delete(request, userid, id):
     redirecturl = '/main/cabinet/' + str(userid)
     try:
@@ -76,7 +78,7 @@ def delete(request, userid, id):
     except Article.DoesNotExist:
         return redirect("<h2>article does't found")
 
-
+@login_required(login_url="login")
 def output(request):
     return render(request, "CourseProject/output.html", {"context": request.POST.get("content")})
 

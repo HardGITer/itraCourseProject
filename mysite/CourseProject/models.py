@@ -17,6 +17,10 @@ class Article(models.Model):
     def get_rating_for_article(self):
         return self.rating_set.filter(article_id=self.id).aggregate(Avg('starCount'))
 
+class Tag(models.Model):
+    text = models.CharField(max_length=20)
+    article = models.ManyToManyField(Article)
+
 class LikeForArticle(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -35,6 +39,3 @@ class Comment(models.Model):
 class LikeForComment(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-class Tag(models.Model):
-    text = models.CharField(max_length=20)

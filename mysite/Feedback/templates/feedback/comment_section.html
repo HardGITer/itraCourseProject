@@ -1,67 +1,35 @@
-{% if request.user.is_authenticated %}
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <h2>Комментарии</h2>
+
     {% for comment in comments %}
-        <a name="comment-{{ comment.id }}"></a>
-        <div class="row" id="{{ comment.id }}">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>{{ comment.user.name }}</strong>&nbsp;&nbsp;
-                        {{ comment.creationDate }}
-                        <a href="#comment-{{ comment.id }}">#</a>
-                    </div>
-                    <div class="panel-body">
-                        <div>{{ comment.text|safe }}</div>
-                    </div>
-                </div>
-        </div>
+<div class="card" style="margin-bottom:6px;">
+	    <div class="card-body">
+	        <div class="row">
+        	    <div class="col-md-2">
+        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+        	        <p style="font-size:12px;" class="text-secondary text-center">{{ comment.creationDate }}</p>
+        	    </div>
+        	    <div class="col-md-10">
+        	        <p>
+        	            <a class="float-left"><strong>{{ comment.user }}</strong></a>
+
+        	       </p>
+        	       <div class="clearfix"></div>
+        	        <p>{{ comment.text|safe }}</p>
+        	        <p>
+        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+        	       </p>
+        	    </div>
+	        </div>
+
+	    </div>
+	</div>
     {% endfor %}
+{% if request.user.is_authenticated %}
 <form action="{% url 'add_comment' %}" method="post">
     {% csrf_token %}
     <button type="submit" id="commentBtn" name="post_id" value="{{ article.id }}" class="btn btn-success">Написать коммантарий</button>
 </form>
-  <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" id="logout">
-        <div class="page-header">
-            <h3 class="reviews">Leave your comment</h3>
-            <div class="logout">
-                <button class="btn btn-default btn-circle text-uppercase" type="button" onclick="$('#logout').hide(); $('#login').show()">
-                    <span class="glyphicon glyphicon-off"></span> Logout
-                </button>
-            </div>
-        </div>
-        <div class="comment-tabs">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#comments-logout" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Comments</h4></a></li>
-                <li><a href="#add-comment" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Add comment</h4></a></li>
-                <li><a href="#account-settings" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Account settings</h4></a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="comments-logout">
-                    <ul class="media-list">
-                      <li class="media">
-                        <a class="pull-left" href="#">
-                          <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
-                        </a>
-                        <div class="media-body">
-                          <div class="well well-lg">
-                              <h4 class="media-heading text-uppercase reviews">Marco </h4>
-                              <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">22</li>
-                                <li class="mm">09</li>
-                                <li class="aaaa">2014</li>
-                              </ul>
-                              <p class="media-comment">
-                                Great snippet! Thanks for sharing.
-                              </p>
-                              <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                              <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> 2 comments</a>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
+{% else %}
+	<button onclick='location.href="{% url "login" %}"' type="submit" id="commentBtn" name="post_id" value="{{ article.id }}" class="btn btn-success">Войти, чтобы написать коммантарий</button>
 {% endif %}

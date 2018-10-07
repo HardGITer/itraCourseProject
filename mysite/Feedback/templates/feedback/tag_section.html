@@ -1,0 +1,53 @@
+<script src="/static/js/jqcloud.js"></script>
+<link rel="stylesheet" href="/static/css/jqcloud.css">
+
+<script type="text/javascript">
+function getTags(){
+    $.ajax({
+            type: 'POST',
+            url: '{% url "get_tag" %}',
+            data: {'id': 20, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: 'json',
+            success: function(response){
+                $('#tag-section').html(response['form'])
+                //console.log($('#tag-section').html(response['form']));
+                //console.log(response.tagar);
+                var tagsarray = response.tagar;
+                var ar = new Array();
+            for (var i = 0; i < tagsarray.length; i++){
+                var cloudObject = new Object();
+                cloudObject["text"] = tagsarray[i];
+                cloudObject["weight"] = Math.random() * (0.5 - 0.1) + 0.1;
+                cloudObject["link"] = "../search/tagSearch/" + String(i+1);
+                console.log(cloudObject);
+                ar.push(cloudObject);
+             }
+            //{text:"Lorem", weight:13, link:"https://github.com/DukeLeNoir/jQCloud"},
+            var word_list = ar
+            $(function () {
+                $("#example").jQCloud(word_list);
+            });
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            }
+            });
+}
+//$(document).one("ready", function(){
+//    getTags();
+    //setInterval('getTags()',5000);
+//});
+
+
+
+
+</script>
+
+<body onload="getTags()">
+
+<form action="{% url 'get_tag' %}" method="post">
+    {% csrf_token %}
+</form>
+<div id="example" style="width: 330px; height: 280px;"></div>
+
+</body>

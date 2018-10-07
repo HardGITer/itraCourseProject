@@ -1,12 +1,14 @@
 {% extends "CourseProject/wrapper.html"%}
 {% block content %}
-<script src="/static/js/uploadImage.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--<script src="/static/js/uploadImage.js"></script>-->
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 <script>
   tinymce.init({
     selector: '#mytextarea'
   });
 </script>
+
 <script type="text/javascript">
 $(document).ready(function(event){
     $(document).on('click', '#like', function(event){
@@ -27,7 +29,13 @@ $(document).ready(function(event){
         });
     });
 });
+
+
+
+
+
 </script>
+
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 <!--<h1>{{LANGUAGE_CODE}}</h1>-->
@@ -45,38 +53,50 @@ $(document).ready(function(event){
 
 <!--border: 1px solid;">-->
 <!--</div>-->
+<!--<div style="width: 300px; float:right">-->
 
-
-<div style="float:right;">
+<div style="float:right; padding-right:110px;">
     <div style="width: 330px;   position: sticky; top: 0; min-height: 2em;" class="card mb-4 shadow-sm">
         <div class="card-header">
             <h4 class="my-0 font-weight-normal">Пользователь</h4>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="background: white;">
             <ul class="list-unstyled mt-3 mb-4">
                 <!--<li>-->
-                    <!--<button class="btn btn-default" type="submit"><a href="{% url 'register' %}">Регистрация</a>-->
-                    <!--</button>-->
+                <!--<button class="btn btn-default" type="submit"><a href="{% url 'register' %}">Регистрация</a>-->
+                <!--</button>-->
                 <!--</li>-->
                 <li>
                     <!--<form action="{% url 'register' %}">-->
-                    <a href="{% url 'register' %}">   <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Зарегистрироваться</button></a>
+                    <a href="{% url 'register' %}">
+                        <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                            Зарегистрироваться
+                        </button>
+                    </a>
                     <!--</form>-->
                 </li>
                 <br>
-                <li><a href="{% url 'login' %}">   <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Войти</button></a></li>
+                <li><a href="{% url 'login' %}">
+                    <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Войти</button>
+                </a></li>
                 <br>
-                <li><a href="{% url 'logout' %}">   <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Выйти</button></a></li>
+                <li><a href="{% url 'logout' %}">
+                    <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Выйти</button>
+                </a></li>
             </ul>
             <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign in</button>-->
         </div>
+            <div id="tag-section" style="position: sticky; top: 0; min-height: 2em;">
+        {% include "feedback/tag_section.html" %}
     </div>
-</div>
+    </div>
+
+    <div style="height:1000px;">
+
+    </div>
 </div>
 
 <div style="width:1200px;" class="container">
-
-
     {% if articles.count > 0 %}
     {% for item in articles %}
 
@@ -84,37 +104,35 @@ $(document).ready(function(event){
         <div style="padding-top:10px; width:1200px;" class="container">
             <div style="padding-left:0px;" class="col">
                 <!--<div id="like-section">-->
-                    <!--{% include "feedback/like_section.html" %}-->
+                <!--{% include "feedback/like_section.html" %}-->
                 <!--</div>-->
                 <div class="likeBlock">
                     <p>&#x25B2</p>
-                    <p style="font-size:12px;">{{ item.get_rating_for_article.starCount__avg }}</p><!--<p style="font-size:12px;">{{ item.likes.count }}</p>-->
+                    <p style="font-size:12px;">{{ item.get_rating_for_article.starCount__avg }}</p>
+                    <!--<p style="font-size:12px;">{{ item.likes.count }}</p>-->
                     <p>&#x25BC</p>
                 </div>
                 <div onclick="location.href='view/{{ item.id }}'" class="card mb-4 shadow-sm clickableBlock">
                     <h1 style="width:98%; margin:auto"><a class="text" href="#">{{ item.name }}</a></h1>
-                    <img class="card-img-top" alt="Thumbnail [100%x225]"
-                         style="height: auto; width: 98%; display: block; margin:auto;"
-                         src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">
+                    <!--<img class="card-img-top" alt="Thumbnail [100%x225]"-->
+                         <!--style="height: auto; width: 98%; display: block; margin:auto;"-->
+                         <!--src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">-->
                     <div class="card-body">
-                        <div style="max-height:180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        <div id="forSave" style="max-height:180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                             <p class="card-text">{{ item.mainText|safe }}</p>
                         </div>
+                        {% for tag in item.tag_set.all %}
                         <div class="tag">
-                            <a href="##">нувпопу</a>
+                            <a href="../search/tagSearch/{{tag.id}}"><span
+                                    class="label label-info">{{ tag.text }}</span></a>
                         </div>
-                        <div class="tag">
-                            <a href="##">сложна</a>
-                        </div>
-                        <div class="tag">
-                            <a href="##">внатурелучшеобезьянкой</a>
-                        </div>
+                        {% endfor %}
                         <br>
                         <br>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">сохранить</button>
+
                             </div>
                             <small class="text-muted">{{item.creationDate}}</small>
                         </div>
