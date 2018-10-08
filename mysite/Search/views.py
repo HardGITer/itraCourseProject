@@ -15,7 +15,7 @@ def tagSearch(request, id):
 def absoluteSearch(request):
     s = Search().filter('term', name=request.GET.get('q'))
     response = s.execute()
-    return render(request, 'search/search.html', { "articles": response })
+    return render(request, 'search/search.html', { "articles": response, "user": request.user })
 
 
 # def search(name):

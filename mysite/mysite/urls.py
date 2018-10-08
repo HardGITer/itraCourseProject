@@ -22,7 +22,7 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('admin/', admin.site.urls),
-    path('main/', include('CourseProject.urls')),
+    path('main/', include('CourseProject.urls'), name="home_page"),
     path('authentication/', include('authentication.urls')),
     path('accounts/', include('allauth.urls')),
     path('feedback/', include('Feedback.urls')),

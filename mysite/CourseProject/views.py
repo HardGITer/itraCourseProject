@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.shortcuts import render, redirect
@@ -17,6 +18,7 @@ def index(request):
 
     # .annotate(likes=Sum('likeforarticle__id')),
     #post = Article.objects.get(id=request.POST.get('id'))
+    print(request.user.is_superuser)
     data = {"user": request.user, "articles": Article.objects.all(),
             "likesForArticles": LikeForArticle.objects.all(),
             "is_liked": True, "total_likes": 5, "rating": Rating.objects.all()}
@@ -69,6 +71,23 @@ def edit(request, userid, id):
             article.mainText = request.POST.get("editor")
             article.save()
             redirecturl = '/main/cabinet/' + str(userid)
+            return redirect(redirecturl)
+        else:
+            return render(request, "CourseProject/editArticle.html", {"article": article})
+    except Article.DoesNotExist:
+        return redirect("<h2>article does't found")
+
+@staff_member_required(login_url="login")
+def adminEdit(request, id):
+    try:
+        article = Article.objects.get(id=id)
+        if request.method == "POST" :
+            article.name = request.POST.get("name")
+            article.shortDescription = request.POST.get("shortDescription")
+            article.specialityNumber = request.POST.get("specialityNumber")
+            article.mainText = request.POST.get("editor")
+            article.save()
+            redirecturl = '/main/adminEdit/' + str(id)
             return redirect(redirecturl)
         else:
             return render(request, "CourseProject/editArticle.html", {"article": article})

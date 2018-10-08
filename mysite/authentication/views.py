@@ -31,4 +31,8 @@ class RegisterFormView(FormView):
 
 def logoutView(request):
     logout(request)
-    return render(request, "authentication/login.html")
+    from CourseProject.models import Article, LikeForArticle, Rating
+    data = {"user": request.user, "articles": Article.objects.all(),
+            "likesForArticles": LikeForArticle.objects.all(),
+            "is_liked": True, "total_likes": 5, "rating": Rating.objects.all()}
+    return render(request, 'CourseProject/index.html', context=data)
