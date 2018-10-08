@@ -55,6 +55,22 @@ $(document).ready(function(event){
 <!--</div>-->
 <!--<div style="width: 300px; float:right">-->
 
+<!--<form method="get" action="{% url 'test_search' %}">-->
+
+  <!--<input id="q" name="q" type="text" placeholder="your search...">-->
+
+<!--</form>-->
+
+{% for item in articles %}
+
+  {{ item.id }}
+  {{ item.name }}
+  {{ item.creationDate }}
+
+  <br>
+
+{% endfor %}
+
 <div style="float:right; padding-right:110px;">
     <div style="width: 330px;   position: sticky; top: 0; min-height: 2em;" class="card mb-4 shadow-sm">
         <div class="card-header">

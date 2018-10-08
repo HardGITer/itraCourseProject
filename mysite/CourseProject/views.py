@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Article, LikeForArticle, Comment, Rating, Tag
-
+# from Search.documents import ArticleDocument
 from django.utils.translation import ugettext as _
 
 
@@ -21,6 +21,16 @@ def index(request):
             "likesForArticles": LikeForArticle.objects.all(),
             "is_liked": True, "total_likes": 5, "rating": Rating.objects.all()}
     return render(request, 'CourseProject/index.html', context=data)
+
+def absoluteSearch(request):
+    q = request.GET.get('q')
+    articles = ''
+    if q:
+        articles = ArticleDocument.search().query("match", title=q)
+    else:
+        posts = ''
+
+    return render(request, 'search/search.html', {"articles": articles})
 
 @login_required(login_url="login")
 def cabinet(request, userid):

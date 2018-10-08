@@ -1,0 +1,15 @@
+<form method="get" action="{% url 'absolute_search' %}">
+  <input id="q" name="q" type="text" placeholder="your search...">
+
+</form>
+
+{% for item in articles %}
+
+  {{ item.id }}
+  {{ item.name }}
+  {{ item.mainText|safe }}
+  {{ item.creationDate }}
+
+  <br>
+
+{% endfor %}
