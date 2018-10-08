@@ -25,6 +25,8 @@ def bulk_indexing():
 def search(name):
     s = Search().filter('term', name=name)
     response = s.execute()
+    print(response)
+
     return response
 
 #################
