@@ -167,15 +167,6 @@ setInterval('check()',5000);
                         <div id="forSave">
                             <p class="card-text">{{ article.mainText|safe }}</p>
                         </div>
-                        <div class="tag">
-                            <a href="##">нувпопу</a>
-                        </div>
-                        <div class="tag">
-                            <a href="##">сложна</a>
-                        </div>
-                        <div class="tag">
-                            <a href="##">внатурелучшеобезьянкой</a>
-                        </div>
                         {% for tag in article.tag_set.all %}
                         <a href="#"><span class="label label-info">{{ tag.text }}</span></a>
                         {% endfor %}

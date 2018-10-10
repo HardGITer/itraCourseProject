@@ -90,6 +90,12 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ksenkongg@gmail.com'
+EMAIL_HOST_PASSWORD = 'xervamaneak'
+EMAIL_PORT = 587
+
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 

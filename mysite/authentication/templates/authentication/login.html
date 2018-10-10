@@ -23,9 +23,11 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="hidden" name="next" value="/"/>
-                        <input style="margin-left:16%; width:175px; margin-top:10px;" type="submit" value="Log in" class="btn btn-default"/>
+                        <input style="margin-left:16%; width:175px; margin-top:10px;" type="submit" value="Log in"
+                               class="btn btn-default"/>
                     </div>
                 </div>
+
                 {% if form.errors %}
                 <p class="validation-summary-errors">Please enter a correct user name and password.</p>
                 {% endif %}

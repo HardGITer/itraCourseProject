@@ -31,6 +31,13 @@
             <!--<input type="text" name="mainText" value="{{article.mainText}}" />-->
             <textarea name="editor" id="editor">{{article.mainText|safe}}</textarea>
         </p>
+        <p>
+            <input name="tags" id="tags" type="text" data-role="tagsinput" value="
+{% for tag in article.tag_set.all %}
+                        {{ tag.text }}
+                        {% endfor %}"
+            >
+        </p>
         <input type="submit" value="Сохранить" >
     </form>
 {% endblock %}

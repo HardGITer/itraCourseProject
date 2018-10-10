@@ -2,9 +2,12 @@ import datetime
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
+
+from CourseProject.forms import ArticleCreateForm, UserEditForm
 from .models import Article, LikeForArticle, Comment, Rating, Tag
 # from Search.documents import ArticleDocument
 from django.utils.translation import ugettext as _
@@ -38,7 +41,7 @@ def absoluteSearch(request):
 def cabinet(request, userid):
     if request.user.is_authenticated:
         articles = Article.objects.filter(user=userid)
-        data = {"articles": articles}
+        data = {"articles": articles, "form": UserEditForm()}
         return render(request, "CourseProject/userPage.html", context=data)
     else:
         return redirect("/authentication/login")
@@ -53,8 +56,23 @@ def create(request, userid):
         article.mainText = request.POST.get("editor")  # mainText
         article.creationDate = datetime.datetime.now()
         article.user = request.user
-        # article.tags.set = request.POST.get("tags")
         article.save()
+        print(request.POST.get("tags").split(','))
+        tagsArr = request.POST.get("tags").split(',')
+        for i in tagsArr:
+            currTag = Tag.objects.filter(text=i)
+            if currTag.exists():
+                # tag = Tag()
+                # tag.text = i
+                # tag.save()
+                article.tag_set.add(Tag.objects.get(text=i))
+                # tag.save()
+            else:
+                tag = Tag()
+                tag.text = i
+                tag.save()
+                article.tag_set.add(tag)
+                tag.save()
         # return redirect("main/cabinet")
         return render(request, "CourseProject/output.html", {"context": request.POST.get("editor")})
     else:
@@ -126,3 +144,14 @@ def view(request, id):
             "is_liked": is_liked, "total_likes": article.likes.all().count()})
     except Article.DoesNotExist:
         return redirect("<h2>article does't found<h2>")
+
+def editUser(request):
+    if request.method == "POST":
+        form = UserEditForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserEditForm(instance=request.user)
+    articles = Article.objects.filter(user=request.user)
+    data = {"articles": articles, 'form':form}
+    return render(request, "CourseProject/userPage.html", context=data)

@@ -15,7 +15,7 @@
         <div class="col-sm-5">
             <div class="rating-block" style="">
                 <h4>Рейтинг конспекта: </h4>
-                <h2 id="avgrating" class="bold padding-bottom-7">{{ article.get_rating_for_article.starCount__avg }}
+                <h2 id="avgrating" class="bold padding-bottom-7">{% if article.get_rating_for_article.starCount__avg != None %}{{ article.get_rating_for_article.starCount__avg }}{% else %} 0 {% endif %}
                     <small>/ 5</small>
                 </h2>
                 <div id="btns">

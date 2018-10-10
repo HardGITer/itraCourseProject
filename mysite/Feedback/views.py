@@ -78,7 +78,7 @@ def add_rating(request):
     # is_rated = False
     if Rating.objects.filter(user = request.user.id, article=article).exists():
         # is_rated = False
-        rating = Rating.objects.get(user = request.user.id)
+        rating = Rating.objects.get(user = request.user.id, article=article)
         rating.starCount = request.POST.get('starCount')
         rating.save()
     else:
