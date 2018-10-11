@@ -3,11 +3,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--<script src="/static/js/uploadImage.js"></script>-->
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-<script>
-  tinymce.init({
-    selector: '#mytextarea'
-  });
-</script>
+<!--<script>-->
+  <!--tinymce.init({-->
+    <!--selector: '#mytextarea'-->
+  <!--});-->
+<!--</script>-->
 
 <script type="text/javascript">
 $(document).ready(function(event){
@@ -30,6 +30,25 @@ $(document).ready(function(event){
     });
 });
 
+</script>
+
+<script>
+    $(document).ready(function(){
+        //var image = document.querySelector('.forSave p span img');
+        //alert(image);
+
+        var someimage = document.getElementsById('forSave');
+        for (var i = 0; i < someimage.length; i++) {
+            console.log(someimage[i]);
+        }
+
+        //console.log(someimage);
+        var myimg = someimage.getElementsByTagName('img')[0];
+        console.log(myimg.src);
+
+        var previewImg = document.getElementById('preview');
+        previewImg.src = myimg.src;//"https://image.shutterstock.com/image-vector/art-craft-hand-drawn-vector-450w-285279662.jpg";
+    })
 </script>
 
 {% load i18n %}
@@ -97,6 +116,7 @@ $(document).ready(function(event){
                     <div onclick="location.href='view/{{ item.id }}'" class="card mb-4 shadow-sm clickableBlock">
                         {% endif %}
                     <h1 style="width:98%; margin:auto"><a class="text" href="#">{{ item.name }}</a></h1>
+                            <img id="preview" src="" alt="">
                     <!--<img class="card-img-top" alt="Thumbnail [100%x225]"-->
                          <!--style="height: auto; width: 98%; display: block; margin:auto;"-->
                          <!--src="https://millionstatusov.ru/pic/statpic/all/58e61335ec518.jpg" data-holder-rendered="true">-->

@@ -9,52 +9,130 @@
     {% get_current_language as LANGUAGE_CODE %}
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/tinyinit.js' %}"></script>
-
+    <!--<script src="{% static 'js/tinyinit.js' %}"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
-        tinymce.init({
-  selector: '#editor',
-  plugins: 'image code paste',
-  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignrigth alignjustify | bullist numlist outdent indent | link image media",
-  // enable title field in the Image dialog
-  image_title: true,
-  image_upload_url: true,
-  // enable automatic uploads of images represented by blob or data URIs
-  automatic_uploads: true,
-  // add custom filepicker only to Image dialog
-  file_picker_types: 'image',
-  paste_data_images:true,
-  file_picker_callback: function(cb, value, meta) {
-    var input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
+    function Upload(url_blob, callback){
+var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
+        var CLOUDINARY_UPLOAD_PRESET = 'ep22wd9t';
 
-    input.onchange = function() {
-      var file = this.files[0];
-      var reader = new FileReader();
+            var file = url_blob;
+            console.log("file" + file);
+                var formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+                axios({
+                    url: CLOUDINARY_URL,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    data: formData
+                }).then(function (res) {
+                    console.log(res);
+                    alert(res.data.secure_url);
+                    callback();
+                    return(res.data.secure_url);
+                }).catch(function (err) {
+                    console.error(err);
+                })
+}
+        $(function () {
 
-      reader.onload = function () {
-        var id = 'blobid' + (new Date()).getTime();
-        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-        var base64 = reader.result.split(',')[1];
-        //alert(base64);
-        var blobInfo = blobCache.create(id, file, base64);
-        //alert(blobInfo.blobUri());
-        //blobInfo.blobUri() = "https://st.depositphotos.com/1752627/2306/i/450/depositphotos_23061294-stock-photo-hearts-drawn-on-the-sand.jpg";
-        blobCache.add(blobInfo);
-        // call the callback and populate the Title field with the file name
-        cb(blobInfo.blobUri(), { title: file.name });
-        //cb("https://st.depositphotos.com/1752627/2306/i/450/depositphotos_23061294-stock-photo-hearts-drawn-on-the-sand.jpg", { title: file.name });
-        //alert(blobInfo.blobUri() + "  filename  " + file.name);
-      };
-      reader.readAsDataURL(file);
-    };
+       tinymce.init({
+                selector: '#editor',
+                theme: "modern",
+                resize: "both",
+                plugins: "paste preview hr textcolor insertdatetime image",
+                menubar: false,
+                toolbar: "forecolor backcolor | image | subscript superscript | hr inserttime | preview",
+                statusbar: true,
+                content_css: "bootstrap-richtext-content.css",
+                paste_data_images: true,
+                file_picker_types: 'image',
+                file_browser_callback: function (field_name, url, type, window) {
 
-    input.click();
-  }
+                    var input = document.createElement('input');
+                    input.setAttribute('type', 'file');
+                    input.setAttribute('accept', 'image/*');
+
+                    input.onchange = function () {
+                        var file = this.files[0];
+                        var reader = new FileReader();
+												alert("test");
+                        reader.onload = function () {
+                            var base64 = reader.result;
+
+                            var image = new Image();
+                            image.src = base64;
+                            image.alt = file.name;
+														alert(image.src);
+                            //var uploadedImage =  Upload(image.src);
+
+                            //SetTimeout(5000, alert("timeout test   " + uploadedImage));
+                            Upload(image.src);
+                            image.onload = function () {
+
+                                window.document.getElementById(field_name).value = image.src;
+                                $('input.mce-last', window.document).val(image.alt);
+                            }
+														alert(image.src);
+                        };
+
+                        reader.readAsDataURL(file);
+                    };
+
+                    input.click();
+                }
+       });
 });
     </script>
+
+
+    <!--<script>-->
+        <!--tinymce.init({-->
+  <!--selector: '#editor',-->
+  <!--plugins: 'image code paste',-->
+  <!--toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignrigth alignjustify | bullist numlist outdent indent | link image media",-->
+  <!--// enable title field in the Image dialog-->
+  <!--image_title: true,-->
+  <!--image_upload_url: true,-->
+  <!--// enable automatic uploads of images represented by blob or data URIs-->
+  <!--automatic_uploads: true,-->
+  <!--// add custom filepicker only to Image dialog-->
+  <!--file_picker_types: 'image',-->
+  <!--paste_data_images:true,-->
+  <!--file_picker_callback: function(cb, value, meta) {-->
+    <!--var input = document.createElement('input');-->
+    <!--input.setAttribute('type', 'file');-->
+    <!--input.setAttribute('accept', 'image/*');-->
+
+    <!--input.onchange = function() {-->
+      <!--var file = this.files[0];-->
+      <!--var reader = new FileReader();-->
+        <!--alert("test");-->
+      <!--reader.onload = function () {-->
+        <!--var id = 'blobid' + (new Date()).getTime();-->
+        <!--var blobCache =  tinymce.activeEditor.editorUpload.blobCache;-->
+        <!--var base64 = reader.result.split(',')[1];-->
+        <!--//alert(base64);-->
+        <!--var blobInfo = blobCache.create(id, file, base64);-->
+        <!--//alert(blobInfo.blobUri());-->
+        <!--//blobInfo.blobUri() = "https://st.depositphotos.com/1752627/2306/i/450/depositphotos_23061294-stock-photo-hearts-drawn-on-the-sand.jpg";-->
+        <!--blobCache.add(blobInfo);-->
+        <!--// call the callback and populate the Title field with the file name-->
+        <!--cb(blobInfo.blobUri(), { title: file.name });-->
+        <!--//cb("https://st.depositphotos.com/1752627/2306/i/450/depositphotos_23061294-stock-photo-hearts-drawn-on-the-sand.jpg", { title: file.name });-->
+        <!--//alert(blobInfo.blobUri() + "  filename  " + file.name);-->
+      <!--};-->
+      <!--reader.readAsDataURL(file);-->
+    <!--};-->
+
+    <!--input.click();-->
+  <!--}-->
+<!--});-->
+    <!--</script>-->
 
 </head>
 
