@@ -14,13 +14,13 @@
 } );
 </script>
 
-<div style="margin-top:0px; padding-top:0px;" class="tab">
+<div style="margin-top:0px; padding-top:0px;" class="tab container">
   <button style="width:50%" class="tablinks" onclick="openCity(event, 'Profile')">Профиль</button>
   <button style="width:50%" class="tablinks" id="defaultOpen" onclick="openCity(event, 'ArticlesTab')">Конспекты</button>
 </div>
 <!-- Tab content -->
-<div id="Profile" class="tabcontent">
-    <form method="post" action="{% url 'edit_user' %}" enctype="multipart/form-data">
+<div id="Profile" style="background:white;" class="tabcontent container">
+    <form style=" margin-left:40%;" method="post" action="{% url 'edit_user' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {% for item in form %}
         {{ item.label }}
@@ -35,7 +35,7 @@
         <!--<br>-->
         <!--<p>Пароль</p>-->
         <!--<input type="text" name="password" is="password">-->
-        <input type="submit" value="Create" class="btn btn-default">
+        <input style="margin-top:10px; margin-left:6%;" type="submit" value="Create" class="btn btn-default">
     </form>
 </div>
 
@@ -43,7 +43,7 @@
 
 
 
-<div id="ArticlesTab" class="tabcontent">
+<div id="ArticlesTab" style="background:white;" class="tabcontent container">
 {% if articles.count > 0 %}
 <div style="padding-top:10px; width:1200px;" class="container">
     <table id="example" class="table-striped table-bordered" style="width:100%">

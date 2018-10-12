@@ -1,0 +1,26 @@
+<div class="card" style="margin-bottom:6px;">
+	    <div class="card-body">
+	        <div class="row">
+        	    <div class="col-md-2">
+        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+        	        <p style="font-size:12px;" class="text-secondary text-center">{{ comment.creationDate }}</p>
+        	    </div>
+        	    <div class="col-md-10">
+        	        <p>
+        	            <a class="float-left"><strong>{{ comment.user }}</strong></a>
+
+        	       </p>
+        	       <div class="clearfix"></div>
+        	        <p>{{ comment.text }}</p>
+        	        <p>
+                        <form action="{% url 'like_comment' %}" method="post">
+                        {% csrf_token %}
+						{{ comment.get_likes_for_comment }}
+        	            <a type="submit" id="likeCommentBtn" name="comment_id" value="{{ comment.id }}" class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                        </form>
+        	       </p>
+        	    </div>
+	        </div>
+
+	    </div>
+	</div>

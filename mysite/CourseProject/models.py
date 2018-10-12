@@ -54,6 +54,9 @@ class Comment(models.Model):
     text = models.TextField()
     creationDate = models.DateTimeField()
 
+    def get_likes_for_comment(self):
+        return self.likeforcomment_set.filter(comment_id=self.id).count()
+
 class LikeForComment(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

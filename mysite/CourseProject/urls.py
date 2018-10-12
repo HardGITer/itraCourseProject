@@ -13,5 +13,6 @@ urlpatterns=[
     path('view/<int:id>/', views.view),
     path('cabinet/output', views.output),
     path('testSearch', views.absoluteSearch, name="test_search"),
-    path('editUser', views.editUser, name="edit_user")
+    path('editUser', views.editUser, name="edit_user"),
+    path('changeTheme', views.changeTheme, name='change_theme'),
 ]

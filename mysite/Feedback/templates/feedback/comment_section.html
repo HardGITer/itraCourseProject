@@ -2,27 +2,8 @@
     <h2>Комментарии</h2>
 
     {% for comment in comments %}
-<div class="card" style="margin-bottom:6px;">
-	    <div class="card-body">
-	        <div class="row">
-        	    <div class="col-md-2">
-        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-        	        <p style="font-size:12px;" class="text-secondary text-center">{{ comment.creationDate }}</p>
-        	    </div>
-        	    <div class="col-md-10">
-        	        <p>
-        	            <a class="float-left"><strong>{{ comment.user }}</strong></a>
-
-        	       </p>
-        	       <div class="clearfix"></div>
-        	        <p>{{ comment.text|safe }}</p>
-        	        <p>
-        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-        	       </p>
-        	    </div>
-	        </div>
-
-	    </div>
+    <div id="single_comment-section">
+		<p class="card-text">{% include "feedback/single_comment_section.html" %}</p>
 	</div>
     {% endfor %}
 {% if request.user.is_authenticated %}

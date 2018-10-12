@@ -12,6 +12,8 @@ from django.template.loader import render_to_string
 
 from django.apps import apps
 
+from CourseProject.models import LikeForArticle, LikeForComment
+
 Article = apps.get_model('CourseProject', 'Article')
 Comment = apps.get_model('CourseProject', 'Comment')
 Rating = apps.get_model('CourseProject', 'Rating')
@@ -20,6 +22,10 @@ Tag = apps.get_model('CourseProject', 'Tag')
 
 def index(request):
     return render(request,"test")
+
+
+
+
 
 @login_required(login_url="login")
 def like_post(request): # надо передавать все статьи, и как-то получать лайкнул юзер или нет
@@ -71,6 +77,28 @@ def check_comment(request):
     if request.is_ajax():
         html = render_to_string('feedback/comment_section.html',context=context, request=request)
         return JsonResponse({'form': html})
+
+
+def like_comment(request):
+    comment = Comment.objects.get(id=request.POST.get('id'))
+    if LikeForComment.objects.filter(user = request.user.id, comment=comment).exists():
+        print("alredy defined")
+        like = LikeForComment.objects.filter(user = request.user.id, comment=comment)
+        like.delete()
+    else:
+        like = LikeForComment()
+        like.user = request.user
+        like.comment = comment
+        like.save()
+    comment = Comment.objects.get(id=request.POST.get('id'))
+    context = {
+        'comment': comment,
+    }
+    if request.is_ajax():
+        html = render_to_string('feedback/single_comment_section.html', context=context, request=request)
+        return JsonResponse({'form': html})
+
+
 
 @login_required(login_url="login")
 def add_rating(request):

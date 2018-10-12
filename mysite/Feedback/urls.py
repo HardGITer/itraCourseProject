@@ -9,4 +9,5 @@ urlpatterns=[
     path('checkComment', views.check_comment, name="check_comment"),
     path('addRating/', views.add_rating, name="add_rating"),
     path('tag/', views.get_tags, name="get_tag"),
+    path('likeComment/', views.like_comment, name="like_comment"),
 ]

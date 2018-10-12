@@ -1,0 +1,12 @@
+{% load staticfiles %}
+body{
+	background: url({% static 'img/light.png' %}) no-repeat;
+	background-size: 100%;
+}
+
+#Theme{
+	color: black;
+}
+ nav{
+ 	background: #BDBDBD;
+ }

@@ -22,9 +22,15 @@ def index(request):
     # .annotate(likes=Sum('likeforarticle__id')),
     #post = Article.objects.get(id=request.POST.get('id'))
     print(request.user.is_superuser)
+    if 'theme' in request.session:
+        theme = request.session['theme']
+    else:
+        request.session['theme'] = 'default'
+        theme = request.session['theme']
+
     data = {"user": request.user, "articles": Article.objects.all(),
             "likesForArticles": LikeForArticle.objects.all(),
-            "is_liked": True, "total_likes": 5, "rating": Rating.objects.all()}
+            "is_liked": True, "total_likes": 5, "rating": Rating.objects.all(), "theme": theme}
     return render(request, 'CourseProject/index.html', context=data)
 
 def absoluteSearch(request):
@@ -155,3 +161,14 @@ def editUser(request):
     articles = Article.objects.filter(user=request.user)
     data = {"articles": articles, 'form':form}
     return render(request, "CourseProject/userPage.html", context=data)
+
+def changeTheme(request):
+    changedTheme = request.POST.get('theme')
+    request.session['theme'] = changedTheme
+    data = {"user": request.user, "articles": Article.objects.all(),
+            "likesForArticles": LikeForArticle.objects.all(),
+            "is_liked": True, "total_likes": 5, "rating": Rating.objects.all(), "theme": request.session['theme']}
+    return render(request, "CourseProject/index.html", context=data)
+
+def orderByRating(request):
+    articles = Article.objects.all().filter('rating')

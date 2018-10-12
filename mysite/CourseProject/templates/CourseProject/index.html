@@ -37,7 +37,7 @@ $(document).ready(function(event){
         //var image = document.querySelector('.forSave p span img');
         //alert(image);
 
-        var someimage = document.getElementsById('forSave');
+        var someimage = document.getElementById('forSave');
         for (var i = 0; i < someimage.length; i++) {
             console.log(someimage[i]);
         }
@@ -95,6 +95,7 @@ $(document).ready(function(event){
 </div>
 
 <div style="width:1200px;" class="container">
+    <button>Сортировать по рейтингам</button>
     {% if articles.count > 0 %}
     {% for item in articles %}
 
