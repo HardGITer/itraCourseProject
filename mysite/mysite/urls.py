@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('feedback/', include('Feedback.urls')),
     path('search/', include('Search.urls')),
+    url(r'^messages/', include('postman.urls', namespace='postman')),
 ]
 
 # urlpatterns = [

@@ -90,9 +90,9 @@ def like_comment(request):
         like.user = request.user
         like.comment = comment
         like.save()
-    comment = Comment.objects.get(id=request.POST.get('id'))
+    comments = Comment.objects.get(id=request.POST.get('id'))
     context = {
-        'comment': comment,
+        'comment': comments,
     }
     if request.is_ajax():
         html = render_to_string('feedback/single_comment_section.html', context=context, request=request)

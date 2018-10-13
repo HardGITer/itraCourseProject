@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Search',
     'django.contrib.sites',
     'django_elasticsearch_dsl',
+    'postman',
 ]
 
 ELASTICSEARCH_DSL = {
