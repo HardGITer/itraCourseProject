@@ -56,7 +56,7 @@ $(document).ready(function(event){
 <div style="float:right; width: 330px; margin-right:100px;">
     <div style="position: sticky; top: 0; min-height: 2em;" class="card mb-4 shadow-sm">
         <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Пользователь</h4>
+            <h4 class="my-0 font-weight-normal">{% trans "Пользователь" %}</h4>
         </div>
         <div class="card-body" style="background: white;">
             <ul class="list-unstyled mt-3 mb-4">
@@ -68,18 +68,18 @@ $(document).ready(function(event){
                     <!--<form action="{% url 'register' %}">-->
                     <a href="{% url 'signup' %}">
                         <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">
-                            Зарегистрироваться
+                            {% trans "Зарегистрироваться" %}
                         </button>
                     </a>
                     <!--</form>-->
                 </li>
                 <br>
                 <li><a href="{% url 'login' %}">
-                    <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Войти</button>
+                    <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">{% trans "Войти" %}</button>
                 </a></li>
                 <br>
                 <li><a href="{% url 'logout' %}">
-                    <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">Выйти</button>
+                    <button type="button" type="submit" class="btn btn-lg btn-block btn-outline-primary">{% trans "Выйти" %}</button>
                 </a></li>
             </ul>
             <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign in</button>-->
@@ -135,7 +135,7 @@ $(document).ready(function(event){
                         <br>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">комментировать</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">{% trans "комментировать" %}</button>
 
                             </div>
                             <small class="text-muted">{{item.creationDate}}</small>

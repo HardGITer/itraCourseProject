@@ -1,3 +1,5 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <h2>Комментарии</h2>
 
@@ -9,8 +11,8 @@
 {% if request.user.is_authenticated %}
 <form action="{% url 'add_comment' %}" method="post">
     {% csrf_token %}
-    <button type="submit" id="commentBtn" name="post_id" value="{{ article.id }}" class="btn btn-success">Написать коммантарий</button>
+    <button type="submit" id="commentBtn" name="post_id" value="{{ article.id }}" class="btn btn-success">{% trans "Написать коммантарий" %}</button>
 </form>
 {% else %}
-	<button onclick='location.href="{% url "login" %}"' type="submit" id="commentBtn" name="post_id" value="{{ article.id }}" class="btn btn-success">Войти, чтобы написать коммантарий</button>
+	<button onclick='location.href="{% url "login" %}"' type="submit" id="commentBtn" name="post_id" value="{{ article.id }}" class="btn btn-success">{% trans "Войти, чтобы написать коммантарий" %}</button>
 {% endif %}

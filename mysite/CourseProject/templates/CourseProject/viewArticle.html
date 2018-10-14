@@ -187,7 +187,7 @@ setInterval('check()',3000);
                             <p class="card-text">{{ article.mainText|safe }}</p>
                         </div>
                         {% for tag in article.tag_set.all %}
-                        <a href="#"><span class="label label-info">{{ tag.text }}</span></a>
+                        <a href="{% url 'tag_search' id=tag.id %}"><span class="label label-info">{{ tag.text }}</span></a>
                         {% endfor %}
                         <br>
                         <br>

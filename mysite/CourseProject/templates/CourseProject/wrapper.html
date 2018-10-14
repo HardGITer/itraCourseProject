@@ -143,7 +143,7 @@ var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
 <header style="margin-bottom:70px">
     <nav id="navbar" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/main/">{% trans "Название сайта"%}</a>
+            <a class="navbar-brand" href="/main/">ArticleSharing.by</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -174,7 +174,7 @@ var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
                                 class="sr-only">(current)</span></a>
                     </li>
                     <li style="font-size:18px;" class="nav-item">
-                        <a class="nav-link" href="#">&#9993;<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/messages/">&#9993;<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/main/cabinet/{{ user.id }}">{{ user.username }}</a>
@@ -205,7 +205,7 @@ var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
 
                 <input type="hidden" name="next" value="{{ redirect_to }}">
                 <div>
-                    <label style="color:white;" for="language">Язык</label>
+                    <label style="color:white;" for="language">{% trans "Язык" %}</label>
                 <select name="language" id="language" class="form-control" style="width:65px;display:inline-block; padding-top:0px;">
                     {% get_available_languages as LANGUAGES %}
                     {% get_language_info_list for LANGUAGES as languages %}
@@ -220,7 +220,7 @@ var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
             </form>
             <form style="display:inline-block;" action="{% url "change_theme" %}" method="post">
                 {% csrf_token %}
-    <label style="color:white;" for="theme">Тема</label>
+    <label style="color:white;" for="theme">{% trans "Тема" %}</label>
                 <button class="btn btn-success" id="theme" name="theme" value="first">Default</button>
                 <button class="btn btn-light" id="theme" name="theme" value="second">Light</button>
             </form>

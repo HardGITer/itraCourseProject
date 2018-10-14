@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-24 19:33+0300\n"
+"POT-Creation-Date: 2018-10-14 19:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,105 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:12
-#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:20
-msgid "Название сайта"
+#: .\mysite\CourseProject\templates\CourseProject\index.html:59
+#: .\mysite\Search\templates\search\search.html:44
+#: .\mysite\Search\templates\search\tagSearch.html:42
+msgid "Пользователь"
+msgstr "Карыстальнік"
+
+#: .\mysite\CourseProject\templates\CourseProject\index.html:71
+#: .\mysite\Search\templates\search\search.html:56
+#: .\mysite\Search\templates\search\tagSearch.html:54
+msgid "Зарегистрироваться"
+msgstr "Зарэгістравацца"
+
+#: .\mysite\CourseProject\templates\CourseProject\index.html:78
+#: .\mysite\Search\templates\search\search.html:63
+#: .\mysite\Search\templates\search\tagSearch.html:61
+msgid "Войти"
+msgstr "Увайсці"
+
+#: .\mysite\CourseProject\templates\CourseProject\index.html:82
+#: .\mysite\Search\templates\search\search.html:67
+#: .\mysite\Search\templates\search\tagSearch.html:65
+msgid "Выйти"
+msgstr "Выйсці"
+
+#: .\mysite\CourseProject\templates\CourseProject\index.html:138
+#: .\mysite\Search\templates\search\search.html:112
+#: .\mysite\Search\templates\search\tagSearch.html:114
+msgid "комментировать"
+msgstr "каментаваць"
+
+#: .\mysite\CourseProject\templates\CourseProject\userPage.html:19
+msgid "Профиль"
+msgstr "Профіль"
+
+#: .\mysite\CourseProject\templates\CourseProject\userPage.html:20
+msgid "Конспекты"
+msgstr "Канспекты"
+
+#: .\mysite\CourseProject\templates\CourseProject\userPage.html:53
+#, fuzzy
+#| msgid "Название сайта"
+msgid "Название"
 msgstr "Назва сайта"
 
-#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:27
+#: .\mysite\CourseProject\templates\CourseProject\userPage.html:54
+msgid "Дата создания"
+msgstr "Дата стварэння"
+
+#: .\mysite\CourseProject\templates\CourseProject\userPage.html:55
+msgid "Удаление"
+msgstr "Выдаленне"
+
+#: .\mysite\CourseProject\templates\CourseProject\userPage.html:63
+msgid "удалить"
+msgstr "выдаліць"
+
+#: .\mysite\CourseProject\templates\CourseProject\userPage.html:70
+#, fuzzy
+#| msgid "Рейтинг конспекта:"
+msgid "Пока нет конспектов"
+msgstr "Рэйтынг канспекта:"
+
+#: .\mysite\CourseProject\templates\CourseProject\userPage.html:71
+#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:157
+msgid "Создать конспект"
+msgstr "Стварыць канспект"
+
+#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:154
 msgid "Домой"
 msgstr "Дадому"
 
-#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:37
-#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:38
+#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:168
+#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:169
 msgid "Поиск"
 msgstr "Пошук"
+
+#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:208
+msgid "Язык"
+msgstr "Мова"
+
+#: .\mysite\CourseProject\templates\CourseProject\wrapper.html:223
+msgid "Тема"
+msgstr "Тэма"
+
+#: .\mysite\Feedback\templates\feedback\comment_section.html:14
+msgid "Написать коммантарий"
+msgstr "Напісаць каментарый"
+
+#: .\mysite\Feedback\templates\feedback\comment_section.html:17
+msgid "Войти, чтобы написать коммантарий"
+msgstr "Увайсці, каб напісаць коммантарий"
+
+#: .\mysite\Feedback\templates\feedback\like_section.html:8
+msgid "Мне нравится"
+msgstr "Мне падабаецца"
+
+#: .\mysite\Feedback\templates\feedback\rating_section.html:19
+msgid "Рейтинг конспекта:"
+msgstr "Рэйтынг канспекта:"
 
 #~ msgid "Давайте переведем это"
 #~ msgstr "Давайце перавядзем гэта"

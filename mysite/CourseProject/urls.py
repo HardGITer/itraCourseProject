@@ -9,7 +9,7 @@ urlpatterns=[
     path('cabinet/<int:userid>/create/', views.create, name="create_article"),
     path('cabinet/<int:userid>/edit/<int:id>/', views.edit),
     path('adminEdit/<int:id>/', views.adminEdit),
-    path('cabinet/<int:userid>/delete/<int:id>/', views.delete),
+    path('cabinet/<int:userid>/delete/<int:id>/', views.delete, name="delete_article"),
     path('view/<int:id>/', views.view),
     path('cabinet/output', views.output),
     path('testSearch', views.absoluteSearch, name="test_search"),

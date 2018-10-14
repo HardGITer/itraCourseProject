@@ -22,3 +22,7 @@
 .pm_message.pm_rejected .pm_header {
  background-color: #FDD;
 }
+
+.pm_undelete_button{
+text-size:100px;
+}

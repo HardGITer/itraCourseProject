@@ -1,9 +1,11 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {{ total_likes }} Like
 {% if request.user.is_authenticated %}
 <form action="{% url 'like_post' %}" method="post">
     {% csrf_token %}
     {% if is_liked %}
-    <button type="submit" id="like" name="post_id" value="{{ article.id }}" class="btn btn-success">liked</button>
+    <button type="submit" id="like" name="post_id" value="{{ article.id }}" class="btn btn-success">{% trans "Мне нравится" %}</button>
     {% else %}
     <button type="submit" id="like" name="post_id" value="{{ article.id }}" class="btn btn-danger">disliked</button>
     {% endif %}

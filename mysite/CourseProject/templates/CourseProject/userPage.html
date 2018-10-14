@@ -13,10 +13,11 @@
     document.getElementById("defaultOpen").click();
 } );
 </script>
-
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <div style="margin-top:0px; padding-top:0px;" class="tab container">
-  <button style="width:50%" class="tablinks" onclick="openCity(event, 'Profile')">Профиль</button>
-  <button style="width:50%" class="tablinks" id="defaultOpen" onclick="openCity(event, 'ArticlesTab')">Конспекты</button>
+  <button style="width:50%" class="tablinks" onclick="openCity(event, 'Profile')">{% trans "Профиль" %}</button>
+  <button style="width:50%" class="tablinks" id="defaultOpen" onclick="openCity(event, 'ArticlesTab')">{% trans "Конспекты" %}</button>
 </div>
 <!-- Tab content -->
 <div id="Profile" style="background:white;" class="tabcontent container">
@@ -49,9 +50,9 @@
     <table id="example" class="table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
-            <th>Название</th>
-            <th>Дата создания</th>
-            <th>ajsdgkvb</th>
+            <th>{% trans "Название" %}</th>
+            <th>{% trans "Дата создания" %} </th>
+            <th>{% trans "Удаление" %}</th>
         </tr>
         </thead>
         {% for item in articles %}
@@ -59,15 +60,15 @@
         <tr>
             <td><a href="edit/{{ item.id }}">{{ item.name }}</a></td> <!---->
             <td>{{ item.creationDate }}</td>
-            <td>удалить</td> <!--<a href="delete/{{item.id}}">удалить</a>-->
+            <td><a href="{% url 'delete_article' userid=item.user.id id=item.id %}">{% trans "удалить" %}</a></td> <!--<a href="delete/{{item.id}}">удалить</a>-->
         </tr>
         <!--</tbody>-->
         {% endfor %}
     </table>
     {% else %}
     <div>
-<h1 style="text-align:  center;">Пока нет конспектов</h1>
-        <center><button style="margin-top" onclick="location.href='{% url 'create_article' userid=user.id %}'">Создать конспект</button></center>
+<h1 style="text-align:  center;">{% trans "Пока нет конспектов" %}</h1>
+        <center><button style="margin-top" onclick="location.href='{% url 'create_article' userid=user.id %}'">{% trans "Создать конспект" %}</button></center>
         </div>
 </div>
 

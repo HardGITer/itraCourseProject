@@ -1,3 +1,5 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <div class="card" style="margin-bottom:6px;">
 	    <div class="card-body">
 	        <div class="row">
@@ -16,7 +18,7 @@
                         <form action="{% url 'like_comment' %}" method="post">
                         {% csrf_token %}
 						{{ comment.get_likes_for_comment }}
-        	            <a type="submit" id="likeCommentBtn" name="comment_id" value="{{ comment.id }}" class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+        	            <a type="submit" id="likeCommentBtn" name="comment_id" value="{{ comment.id }}" class="float-right btn text-white btn-success"> <i class="fa fa-heart"></i></a>
                         </form>
         	       </p>
         	    </div>
