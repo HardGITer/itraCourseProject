@@ -35,7 +35,7 @@ var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
                     data: formData
                 }).then(function (res) {
                     console.log(res);
-                    alert(res.data.secure_url);
+                    //alert(res.data.secure_url);
                     callback();
                     return(res.data.secure_url);
                 }).catch(function (err) {
@@ -50,7 +50,8 @@ var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
                 resize: "both",
                 plugins: "paste preview hr textcolor insertdatetime image",
                 menubar: false,
-                toolbar: "forecolor backcolor | image | subscript superscript | hr inserttime | preview",
+                toolbar: "forecolor backcolor | image | subscript superscript | hr inserttime | preview | insertfile undo redo |styleselect | bold italic | alignleft aligncenter alignrigth alignjustify | bullist numlist outdent indent",
+
                 statusbar: true,
                 content_css: "bootstrap-richtext-content.css",
                 paste_data_images: true,
@@ -64,14 +65,14 @@ var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
                     input.onchange = function () {
                         var file = this.files[0];
                         var reader = new FileReader();
-												alert("test");
+												//alert("test");
                         reader.onload = function () {
                             var base64 = reader.result;
 
                             var image = new Image();
                             image.src = base64;
                             image.alt = file.name;
-														alert(image.src);
+														//alert(image.src);
                             //var uploadedImage =  Upload(image.src);
 
                             //SetTimeout(5000, alert("timeout test   " + uploadedImage));
@@ -81,7 +82,7 @@ var CLOUDINARY_URL = '	https://api.cloudinary.com/v1_1/debkidgiu/upload';
                                 window.document.getElementById(field_name).value = image.src;
                                 $('input.mce-last', window.document).val(image.alt);
                             }
-														alert(image.src);
+														//alert(image.src);
                         };
 
                         reader.readAsDataURL(file);

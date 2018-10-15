@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-14 19:59+0300\n"
+"POT-Creation-Date: 2018-10-15 15:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,6 +83,10 @@ msgstr "Рэйтынг канспекта:"
 #: .\mysite\CourseProject\templates\CourseProject\wrapper.html:157
 msgid "Создать конспект"
 msgstr "Стварыць канспект"
+
+#: .\mysite\CourseProject\templates\CourseProject\viewArticle.html:201
+msgid "сохранить"
+msgstr "сахраниць"
 
 #: .\mysite\CourseProject\templates\CourseProject\wrapper.html:154
 msgid "Домой"

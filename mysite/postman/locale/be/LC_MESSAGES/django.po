@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-14 19:59+0300\n"
+"POT-Creation-Date: 2018-10-15 15:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,7 +121,7 @@ msgid "Recipients"
 msgstr ""
 
 #: .\mysite\postman\forms.py:155 .\mysite\postman\forms.py:168
-#: .\mysite\postman\templates\postman\base_folder.html:35
+#: .\mysite\postman\templates\postman\base_folder.html:36
 #: .\mysite\postman\templates\postman\reply.html:4
 msgid "Recipient"
 msgstr ""
@@ -327,61 +327,61 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:15
+#: .\mysite\postman\templates\postman\base_folder.html:16
 msgid "Sorry, this page number is invalid."
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:19
+#: .\mysite\postman\templates\postman\base_folder.html:20
 msgid "by conversation"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:20
+#: .\mysite\postman\templates\postman\base_folder.html:21
 msgid "by message"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:24
+#: .\mysite\postman\templates\postman\base_folder.html:25
 #: .\mysite\postman\templates\postman\view.html:23
 msgid "Delete"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:25
+#: .\mysite\postman\templates\postman\base_folder.html:26
 #: .\mysite\postman\templates\postman\view.html:25
 msgid "Archive"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:26
+#: .\mysite\postman\templates\postman\base_folder.html:27
 msgid "Undelete"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:27
+#: .\mysite\postman\templates\postman\base_folder.html:28
 msgid "Mark as read"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:28
+#: .\mysite\postman\templates\postman\base_folder.html:29
 msgid "Mark as unread"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:33
+#: .\mysite\postman\templates\postman\base_folder.html:34
 msgid "Action"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:34
+#: .\mysite\postman\templates\postman\base_folder.html:35
 msgid "Sender"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:36
+#: .\mysite\postman\templates\postman\base_folder.html:37
 msgid "Subject"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:37
+#: .\mysite\postman\templates\postman\base_folder.html:38
 msgid "Date"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:52
+#: .\mysite\postman\templates\postman\base_folder.html:53
 msgid "g:i A,M j,n/j/y"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\base_folder.html:59
+#: .\mysite\postman\templates\postman\base_folder.html:60
 msgid "No messages."
 msgstr ""
 
@@ -468,11 +468,11 @@ msgstr ""
 msgid "For more comfort, we encourage you to open an account on the site."
 msgstr ""
 
-#: .\mysite\postman\templates\postman\inbox.html:3
+#: .\mysite\postman\templates\postman\inbox.html:4
 msgid "Received Messages"
 msgstr ""
 
-#: .\mysite\postman\templates\postman\inbox.html:6
+#: .\mysite\postman\templates\postman\inbox.html:7
 msgid "Received"
 msgstr ""
 
